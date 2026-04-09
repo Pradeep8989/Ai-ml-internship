@@ -41,3 +41,23 @@ print(df[['Age', 'Fare']].head())
 df.to_csv("cleaned_titanic.csv", index=False)
 
 print("\nCleaned dataset saved successfully!")
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Visualize outliers
+sns.boxplot(x=df['Fare'])
+plt.title("Boxplot for Fare")
+plt.show()
+# Remove outliers using IQR
+
+Q1 = df['Fare'].quantile(0.25)
+Q3 = df['Fare'].quantile(0.75)
+IQR = Q3 - Q1
+
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+df = df[(df['Fare'] >= lower_bound) & (df['Fare'] <= upper_bound)]
+
+print("\nAfter removing outliers:")
+print(df.shape)
