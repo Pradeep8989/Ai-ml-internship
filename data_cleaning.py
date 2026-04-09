@@ -48,6 +48,7 @@ import matplotlib.pyplot as plt
 sns.boxplot(x=df['Fare'])
 plt.title("Boxplot for Fare")
 plt.show()
+plt.savefig("output/boxplot.png")
 # Remove outliers using IQR
 
 Q1 = df['Fare'].quantile(0.25)
